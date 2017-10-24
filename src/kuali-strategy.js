@@ -10,6 +10,7 @@ const ERRORS = {
 }
 
 const defaultOptions = {
+  name: 'kuali',
   getUserEndpoint: () => '/api/v1/users/current',
   getAuthorizationToken: req => {
     const authorization = req.headers['authorization'] || ''
@@ -57,11 +58,11 @@ const defaultMockUser = () => ({
 class KualiStrategy extends Strategy {
   constructor (options) {
     super()
-    this.name = 'kuali'
     this.options = Object.assign({}, defaultOptions, options)
     if (this.options.mockUser === true) {
       this.options.mockUser = defaultMockUser
     }
+    this.name = this.options.name
   }
 
   authenticate (req) {

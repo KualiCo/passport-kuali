@@ -40,6 +40,7 @@ Creates a new Kuali Strategy to be used in passport.
   ```js
   () => '/api/v1/users/current'`
   ```
+
 - `options.getAuthorizationToken` - A function that takes in the express request
   and returns the auth token to be passed onto the Kuali auth service.
   Default is:
@@ -49,6 +50,7 @@ Creates a new Kuali Strategy to be used in passport.
     return authorization.replace(/^bearer /i, '').trim()
   }
   ```
+
 - `options.getHost` - A function that takes in the express request and returns
   the host (or rather, origin) of the request. Should return protocol with the
   hostname. Ex: `https://monsters.kuali.co`.
@@ -65,6 +67,7 @@ Creates a new Kuali Strategy to be used in passport.
   the protocol and host for the default option to work. They can be forwarded on
   the following headers: `X-Forwarded-Proto` and `X-Forwarded-Host`, and you'll
   need to have your express app trust those proxy headers: `app.set('trust proxy', true)`.
+
 - `options.mockUser` - This can be `true` or a function that takes in the
   express request object and should return a user. If `true` is passed, a mock
   user will be provided. If you would like to control the logic of when a user
@@ -102,3 +105,8 @@ Creates a new Kuali Strategy to be used in passport.
     }
   })
   ```
+
+- `options.name` - Change this if you want to have multiple "kuali" strategies
+  implemented. Defaults to `kuali`, and is used when you call
+  `passport.authenticate('kuali')`. If you change this option, you should change
+  the `'kuali'` portion of the `passport.authenticate()` call.
