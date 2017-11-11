@@ -36,7 +36,7 @@ describe('KualiStrategy', () => {
       role: 'admin'
     }
     const token = 'Bearer my-token'
-    nock('http://monsters.kuali.co')
+    nock('https://monsters.kuali.co')
       .get('/api/v1/users/current')
       .reply(function () {
         expect(this.req.headers).toHaveProperty('authorization', token)
@@ -52,7 +52,7 @@ describe('KualiStrategy', () => {
   test('returns 401 if remote returns 401', () => {
     const request = setupApp(null, (req, res) => res.send(req.user))
     const token = 'Bearer my-token'
-    nock('http://monsters.kuali.co')
+    nock('https://monsters.kuali.co')
       .get('/api/v1/users/current')
       .reply(function () {
         return [401, { message: 'Unauthorized' }] // does not match to return body
@@ -67,7 +67,7 @@ describe('KualiStrategy', () => {
   test('returns error if status is anything but 200 or 401', () => {
     const request = setupApp(null, (req, res) => res.send(req.user))
     const token = 'Bearer my-token'
-    nock('http://monsters.kuali.co')
+    nock('https://monsters.kuali.co')
       .get('/api/v1/users/current')
       .reply(function () {
         return [503, { message: 'Service Unavailable' }]
@@ -97,7 +97,7 @@ describe('KualiStrategy', () => {
   test('throws error if there is a network error', () => {
     const request = setupApp(null, (req, res) => res.send(req.user))
     const token = 'Bearer my-token'
-    nock('http://monsters.kuali.co')
+    nock('https://monsters.kuali.co')
       .get('/api/v1/users/current')
       .replyWithError('NETWORK_ERROR')
     return request
@@ -180,7 +180,7 @@ describe('KualiStrategy', () => {
       role: 'admin'
     }
     const token = 'Bearer my-token'
-    nock('http://monsters.kuali.co')
+    nock('https://monsters.kuali.co')
       .get('/api/v2/users/me')
       .reply(function () {
         expect(this.req.headers).toHaveProperty('authorization', token)
@@ -209,7 +209,7 @@ describe('KualiStrategy', () => {
       displayName: 'Test User',
       role: 'admin'
     }
-    nock('http://monsters.kuali.co')
+    nock('https://monsters.kuali.co')
       .get('/api/v1/users/current')
       .reply(function () {
         expect(this.req.headers).toHaveProperty(

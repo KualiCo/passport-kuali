@@ -54,11 +54,11 @@ Creates a new Kuali Strategy to be used in passport.
 - `options.getHost` - A function that takes in the express request and returns
   the host (or rather, origin) of the request. Should return protocol with the
   hostname. Ex: `https://monsters.kuali.co`.
-  Default id:
+  Default is:
   ```js
   req => {
     return url.format({
-      protocol: `${req.protocol}:`,
+      protocol: `https:`,
       host: req.get('host')
     })
   }
